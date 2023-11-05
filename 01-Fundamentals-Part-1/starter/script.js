@@ -254,3 +254,15 @@ if (day === 'Monday') {
 } else {
     console.log("The default statement from the Switch")
 }
+
+// Ternary operators:
+const ternaryAge = 23;
+ternaryAge >= 18 ? console.log("Yay you can drink") : console.log("No drink for you")
+
+// Condition ? If true : Else 
+// Can also be put into Template literals:
+console.log(`Magic panzer of the lake, give me your wisdom, can I drink yet? ${ternaryAge >= 18 ? 'Sure, fam' : 'Nah boi, get some water'}`)
+
+// Tip calculator:
+const bill = 275;
+const tip = bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.20; 
