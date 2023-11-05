@@ -142,3 +142,34 @@ n = n - 1;
 
 console.log('23' - '10' - 3)
 // Coercion here triggers the opposite as the operation is minus, so it will convert to numbers
+
+
+// Truthy and Falsy values:
+/* Falsy values are not completely false until we try to convert them into Boolean values. ie:
+ There are FIVE Falsy values: 0, '', undefined, null, NaN
+ Everything else is "Truthy".
+*/
+console.log(Boolean(0)); // Falsy
+console.log(Boolean(undefined)); // Falsy
+console.log(Boolean('Paige')); // Truthy as it's not empty
+console.log(Boolean({})); // Truthy
+
+const money = 0;
+if (money) {
+    console.log("Don't spend it all at once.");
+} else {
+    console.log("Get a job, dude.")
+}
+
+// Logically speaking, this will run the else, as money is set to 0, which is a falsy value.
+
+let height;
+if(height) {
+    console.log("Height is defined, woo")
+} else {
+    console.log("Height is undefined. Cut that out. No hoisting for you.")
+}
+
+// Height is undefined as it has no value.
+
+// Equality operators:
