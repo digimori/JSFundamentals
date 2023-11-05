@@ -93,3 +93,22 @@ console.log(BMIMark, BMIJohn)
 
 const markHigherBMI = BMIMark > BMIJohn
 console.log(markHigherBMI);
+
+
+// Strings and Template literals:
+const firstName = 'Paige';
+const lastName = 'Bendall';
+const birthYear = 1992;
+const year = 2023;
+
+console.log(`Hi, my name is ${firstName} ${lastName}, and I was born in ${birthYear}. This makes me ${year - birthYear} years old.`)
+// This could also be used with basic concatenation and subtraction ie: 'I am ' + ' ' + (year - birthYear) + ' ' + 'years old.'
+
+// If/Else statements:
+const age = 15;
+
+if (age >= 18) {
+    console.log("Yes, they are old enough.");
+} else {
+    console.log("Not old enough!");
+}
