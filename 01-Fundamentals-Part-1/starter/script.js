@@ -213,3 +213,44 @@ if(scoreDolphins > scoreKoalas && scoreDolphins >= 100) {
     console.log("No one wins :(")
 }
 
+// Switch Statements - Comparing one value to multiple options:
+const day = 'Monday';
+
+switch(day) {
+    case 'Monday': // day === 'Monday - Strict quality comparison
+        console.log('Plan course structure');
+        // We can run multiple lines of code in each case.
+        break;
+    case 'Tuesday':
+        console.log('Tuesdays code')
+        break;
+    case 'Wednesday':
+    case 'Thursday':
+        console.log("Both of the above cases will be evaluated as one");
+        break;
+    case 'Friday':
+        console.log("Also this one")
+        break;
+    case 'Saturday':
+    case 'Sunday':
+        console.log("Weekend time!");
+        break;
+    default:
+        console.log("Basically an else.")
+}
+
+// Re-written as ElseIf for clarity:
+
+if (day === 'Monday') {
+    console.log("Plan course structure")
+} else if (day === 'Tuesday') {
+    console.log("Tuesdays code")
+} else if (day === 'Wednesday' || day === 'Thursday') {
+    console.log("Both evaluations")
+} else if (day === 'Friday') {
+    console.log("Also this one")
+} else if (day === 'Saturday' || day === 'Sunday') {
+    console.log("Weekend time!")
+} else {
+    console.log("The default statement from the Switch")
+}
