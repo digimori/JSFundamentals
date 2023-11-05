@@ -112,3 +112,33 @@ if (age >= 18) {
 } else {
     console.log("Not old enough!");
 }
+
+// Type Conversion and Coercion
+// Conversion - Manually convert from one data type to another, like in TypeScript
+// Coercion - JS automatically converts types 
+
+// Conversion: 
+const inputYear = '1991';
+console.log(inputYear + 18) // This will log 199118 as it's just adding the number to the end of the string.
+
+// To convert a string to a number: Number()
+console.log(Number(inputYear) + 18)
+
+// The variable inputYear however is still a string. So if we log inputYear again by itself, it will log the string again.
+// Converting strings to numbers that aren't a number will return NaN. It will still register as a number if we run typeof, so what it's actually saying is that it's an invalid number.
+
+console.log(String(23), 23);
+// The first will be logged as a string, the second a number.
+
+
+// Coercion:
+console.log('I am ' + 31 + ' years old.')
+// When there is a plus operation between strings, in this case + 31 +, it will automatically figure out that it is a different type (number).
+// This is because the + is causing JS to see it as a string concatenation.
+
+let n = '1' + 1; // 11
+n = n - 1;
+// This will equate to 10. The fact that there isn't an additional + after the 1, makes it a number, so JS will add them together as 1 + 1 = 11.
+
+console.log('23' - '10' - 3)
+// Coercion here triggers the opposite as the operation is minus, so it will convert to numbers
