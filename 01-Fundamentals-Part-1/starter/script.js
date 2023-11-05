@@ -172,4 +172,30 @@ if(height) {
 
 // Height is undefined as it has no value.
 
-// Equality operators:
+// Equality operators: == vs ===:
+const newAge = 18;
+if(newAge === 18) console.log('You just hit 18')
+// Strict equality - True will only be returned if the value of both sides of the operator are exactly the same - Strict does NOT perform type coercion.
+
+if (newAge == 18) console.log('You just loosely hit 18')
+// Loose equality - will return true whether or not the value is string or number. So '18' and 18 will be considered as equal due to type coercion
+
+
+// Booleans - And, Or, Not
+// Example: A and B - "Sarah has a drivers license, AND good vision", A and B must be true.
+// A or B - "Sarah has a drivers license, or has good vision" - either condition must be true, but at least one
+// A not B - "Sarah has a drivers license and NOT good vision" - condition to the left must be true, condition to the right must be false
+// Not A, Not B - Is an inversion to And. So none of the conditions are true.
+// && - And , || - or, !! - not
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+const isTired = true;
+
+if (hasDriversLicense && hasGoodVision) {
+    console.log("You can drive")
+} else if (hasDriversLicense && hasGoodVision && !isTired) {
+    console.log("Can still drive")
+}
+
+
