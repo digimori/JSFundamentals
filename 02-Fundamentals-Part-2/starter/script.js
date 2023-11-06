@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 // A function is reusable code
 // Where a variable holds one value, functions can run multiple lines of code within it as a block
 
@@ -61,4 +61,66 @@ const yearsUntilRetirement2 = (birthYear, firstName) => {
     return `${firstName} will retire in ${retirement} years.`
 }
 
-console.log(yearsUntilRetirement2(1992, 'Paige'));
+console.log(yearsUntilRetirement2(1992, 'Paige'));*/
+
+// Breaking down the functions further, Functions within functions:
+
+// So this will be dividing the fruits "sent" to the processor into pieces
+function cutFruitPieces(fruit) {
+    return fruit * 4;
+}
+
+function fruitProcessor(apples, oranges) {
+    const applePieces = cutFruitPieces(apples); // 8
+    const orangePieces = cutFruitPieces(oranges); // 12
+ 
+    const juice = `Making a juice with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`
+    return juice;
+}
+
+console.log(fruitProcessor(2, 3));
+
+/* So, what's happening here is that we're passing the apples and oranges values through the fruitProcessor function, 
+which is then calling the cutFruitPieces function, passing each parameter individually through as "fruit", then executing the return with this fruit parameter */
+
+const calcAge = function(birthYear) {
+    return 2023 - birthYear;
+}
+
+const yearsUntilRetirement2 = function (birthYear, firstName) {
+    const age = calcAge(birthYear);
+    const retirement = 65 - age;
+    
+    if (retirement > 0) {
+        console.log(`${firstName} retires in ${retirement} years.`)
+        return retirement;
+    } else {
+        console.log(`${firstName} has already retired.`);
+        return -1;
+    }
+}
+
+console.log(yearsUntilRetirement2(1940, 'Paige'));
+
+// return statement immediately exits the function, so anything placed after will not run.
+
+// Function exercise - A team only wins if it has at least double the average score of the other team. Otherwise, no team wins:
+
+const calcAverage = (score1, score2, score3) => {
+    return (score1 + score2 + score3) / 3 
+}
+
+const scoreDolphins = calcAverage(44, 23, 71);
+const scoreKoalas = calcAverage(65, 54, 49);
+
+const checkWinner = function (avgDolphins, avgKoalas) {
+    if (avgDolphins >= 2 * avgKoalas) {
+        console.log(`Dolphins win (${avgDolphins} vs ${avgKoalas}`)
+    } else if (avgKoalas >= 2 * avgDolphins) {
+        console.log(`Koalas win (${avgKoalas} vs ${avgDolphins})`)
+    } else {
+        console.log("No team wins")
+    }
+}
+
+checkWinner(scoreDolphins, scoreKoalas);
