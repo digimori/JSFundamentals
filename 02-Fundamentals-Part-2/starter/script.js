@@ -397,6 +397,31 @@ for(let exercise = 1; exercise < 3; exercise++) {
     console.log(`Starting Exercise: ${exercise}`)
 
     for(let reps = 1; reps < 6; reps++) {
-        console.log(`Reps within the exercise: ${reps}`)
+        console.log(`Reps for exercise ${exercise}: ${reps}`)
     }
 }
+
+// While Loops: Unlike for loops, only the condition can be specified, so whilst this condition is true, the code block runs:
+// The conditions have to be explicitly stated
+let exercise = 1;
+
+while(exercise <= 3) {
+    //console.log(`Exercise count: ${exercise}`);
+    exercise++;
+}
+
+// Another example without a counter, depending on a random variable. IE: A dice roll:
+// While the dice roll is different to 6, keep rolling. As we don't know how many rolls this will take, while is a better use case here than for loops:
+
+let dice = Math.trunc(Math.random() * 6) + 1; // +1 is like with .length, needs the addition so it doesn't stop before the end due to zero-basing.
+
+while(dice !== 6) {
+    console.log(`You rolled: ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if(dice === 6) {
+        console.log("Loop is about to end");
+        console.log(dice);
+    }
+}
+
+// REMEMBER TO NOT JUST PUT THE MATH METHOD IN WITHOUT ASSIGNMENT TO VARIABLE. IT WILL INFINITE!!!
