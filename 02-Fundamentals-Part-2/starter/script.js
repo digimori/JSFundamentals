@@ -61,7 +61,7 @@ const yearsUntilRetirement2 = (birthYear, firstName) => {
     return `${firstName} will retire in ${retirement} years.`
 }
 
-console.log(yearsUntilRetirement2(1992, 'Paige'));*/
+console.log(yearsUntilRetirement2(1992, 'Paige'));
 
 // Breaking down the functions further, Functions within functions:
 
@@ -81,7 +81,7 @@ function fruitProcessor(apples, oranges) {
 console.log(fruitProcessor(2, 3));
 
 /* So, what's happening here is that we're passing the apples and oranges values through the fruitProcessor function, 
-which is then calling the cutFruitPieces function, passing each parameter individually through as "fruit", then executing the return with this fruit parameter */
+which is then calling the cutFruitPieces function, passing each parameter individually through as "fruit", then executing the return with this fruit parameter 
 
 const calcAge = function(birthYear) {
     return 2023 - birthYear;
@@ -325,3 +325,78 @@ const mark = {
   } else if (john.bmi > mark.bmi) {
     console.log(`${john.fullName}'s BMI (${john.bmi}) is higher than ${mark.fullName}'s (${mark.bmi})!`)
   }
+
+  // For Loop - Iteration
+// Initial value, Stop condition - Once the rep count hits 10, Iteration, repeating once each loop
+// For loop will keep running whilst the stop condition is True.
+for(let rep = 1; rep <= 10; rep++) {
+    console.log(`Rep those weights! Counter: ${rep}`);
+}
+
+// Looping arrays, breaking and continuing:
+const looperArray = ['CeeCee', 'Williams', 2023 - 1992, ['Lyney, Lynette, Jemma, Lorenzo']];
+
+// We will be putting the results of typechecking the array loop into this:
+const types = []; // string, string, number, object 
+
+// Looping through the array to its length, rather than hardcoding the index
+// Typeof is getting the type of each array value
+for(let i = 0; i <= looperArray.length - 1; i++) {
+    console.log(looperArray[i], typeof looperArray[i]);
+    // Filling types array
+    // types[i] = typeof looperArray[i];
+
+    // Pushing them onto the end of the array instead:
+    types.push(typeof looperArray[i]);
+};
+console.log(types);
+
+// Another example:
+const years = [1992, 2009, 1900, 1320];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+    ages.push(2023 - years[i]);
+};
+
+console.log(ages);
+
+// Continue and Break statements:
+// Continue - To exit the current iteration of the loop and then continue onto the next part
+
+for(let i = 0; i <= looperArray.length - 1; i++) {
+    // Below is basically saying that if the value is not a string, then continue.
+    // Everything that is a string will be logged, and everything else skipped.
+    if(typeof looperArray[i] !== 'string') continue;
+
+    console.log(looperArray[i], typeof looperArray[i]);
+};
+
+// Break - Completely terminates the entire loop:
+console.log("Once a number is found, break");
+
+for(let i = 0; i <= looperArray.length - 1; i++) {
+    if(typeof looperArray[i] === 'number') break;
+
+    console.log(looperArray[i], typeof looperArray[i]);
+};
+*/
+
+
+// Looping backwards and Loops within Loops:
+
+// Looping backwards:
+const looperArray = ['CeeCee', 'Williams', 2023 - 1992, ['Lyney, Lynette, Jemma, Lorenzo']];
+for(let i = looperArray.length - 1; i >= 0; i--) {
+    console.log(i, looperArray[i]); // i by itself is just giving us an index for reference
+}
+
+// Loop within a Loop: 
+//In this example we are starting an exercise, say lifting weights and doing the reps, then starting another exercise and doing the reps for that
+for(let exercise = 1; exercise < 3; exercise++) {
+    console.log(`Starting Exercise: ${exercise}`)
+
+    for(let reps = 1; reps < 6; reps++) {
+        console.log(`Reps within the exercise: ${reps}`)
+    }
+}
