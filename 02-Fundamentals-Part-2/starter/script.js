@@ -172,3 +172,47 @@ console.log(age4);
 // We can store these results in a new array:
 const ageArray = [calculateAge(years2[0]), calculateAge(years2[years2.length - 1])]
 console.log(ageArray);
+
+// Array operations (Methods):
+// push() Method: Adding elements onto the end of arrays
+const friends2 = ['Jemma', 'Lyney', 'Lynette'];
+const newLength = friends2.push('Arleccino');
+console.log(newLength);
+
+// unshift() method: Adding elements to the front of the array:
+const unshifting = friends2.unshift('Lorenzo');
+console.log(friends2)
+
+// pop() method: Removing elements from the end of an array
+const poppingOff = friends2.pop() // returns the popped value, stored in a variable
+console.log(friends2);
+
+// shift() method: Removing element from front of the array 
+const shiftingoff = friends2.shift();
+console.log(shiftingoff);
+
+// Finding index of a specified value: Returns -1 if the value does not exist
+console.log(friends2.indexOf('Lyney'));
+
+// includes(): returns true if the value exists, false if it does not using strict equality:
+console.log(friends2.includes('Lynette'));
+console.log(friends2.includes('Bob'));
+
+if (friends2.includes('Lyney')) {
+    console.log("You have a friend called Lyney")
+}
+
+// Code will run as Lyney exists in the array and therefore is true.
+
+// Calculating tips exercise:
+const calcTip = function (bill) {
+    return bill >= 50 && bill <= 300 ? bill * .15 : bill * .2;
+}
+
+const bills = [125, 555, 44];
+
+const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+
+const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+
+console.log(totals);
