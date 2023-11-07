@@ -256,3 +256,42 @@ console.log(myProfile);
 const challenge1 = console.log(`${myProfile.firstName} has ${myProfile.hobbies.length} hobbies, and her favourite is ${myProfile.hobbies[1]}`);
 
 // Object Methods:
+// Functions can be used as key-value pairs also:
+
+const anotherProfile = {
+    firstName: 'Cee',
+    lastName: 'Williams',
+    birthYear: 1992,
+    job: 'Web Developer',
+    hobbies: ['Knitting', 'Painting', 'Cooking'],
+    hasDegree: true,
+    //calculateAge: function(birthYear) {
+    //    return 2023 - birthYear;
+    //}
+    // Accessing the object properties without mutating it by using 'this':
+    // calculateAge: function() {
+        // console.log(this); // this refers to the object being called
+       // return 2023 - this.birthYear;
+    //}
+
+    // Another example of the function using this to add a new property:
+    calculateAge: function() {
+        this.age = 2023 - this.birthYear
+        return this.age;
+    },
+    // Object challenge: 
+// "Cee is a 31 year old Web developer and has a degree"
+    getSummary: function() {
+        console.log(`${this.firstName} is a ${this.calculateAge()} year old ${this.job} and has ${this.hasDegree ? 'a' : 'no'} degree.`)
+    }
+}
+
+console.log(anotherProfile.getSummary());
+
+// Accessing the function within the object using dot and bracket notation is the same principle as above, mutating the value
+// console.log(anotherProfile.calculateAge(1985));
+// console.log(anotherProfile['calculateAge'](1996));
+//console.log(anotherProfile.calculateAge());
+
+// This now has the calculation built into the object and so can be used to make multiple profiles without having to individually write everything again.
+// The function must be an expression, defined as a value, with the function's name written as the key
