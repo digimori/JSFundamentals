@@ -124,3 +124,51 @@ const checkWinner = function (avgDolphins, avgKoalas) {
 }
 
 checkWinner(scoreDolphins, scoreKoalas);
+
+// Arrays - Lists containing values - Literal Syntax
+const friends = ['Michael', 'Steven', ' Peter'];
+console.log(friends);
+
+// Creating a new array with parameters from the Array object:
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years);
+
+// Extracting array values, we use square brackets and index numbers:
+console.log(friends[0]);
+
+// Getting number of elements in array using .length property:
+console.log(friends.length); 
+
+// Getting the index of certain elements in the array, such as the last one:
+console.log(friends[friends.length - 1])
+
+// .length is not zero-based, so we need to subtract 1 to get the final index, otherwise it will try finding an index of 3, which does not exist in this particular array.
+
+// Replacing/ Mutating the array:
+friends[2] = 'Jason';
+// This will replace "Peter" in the array with "Jason" by getting the 3rd index in the array and re-assigning it.
+// We can mutate parts of the array one piece at a time, but we cannot reassign the entire array at once.
+// ie: friends = ['Bob', 'Alice'] will not work.
+
+// Arrays can also take on variables and even more arrays, such as:
+const nameAgain = 'Paige';
+const paige = [nameAgain, 'Bendall', 2023 - 1992, 'Web Dev', friends];
+
+// Here we've passed the nameAgain variable, used a string, made a calculation and also inserted the friends array.
+
+// Exercise:
+const calculateAge = function (birthYear1) {
+    return 2023 - birthYear1
+}
+
+const years2 = [1990, 1991, 2002, 2010, 2018];
+
+console.log(calculateAge(years2)); // This will produce NaN as we're trying to subtract a whole array object from a number, so we need to extract the specific number:
+const age3 = calculateAge(years2[2]);
+console.log(age3)
+const age4 = calculateAge(years2[years2.length - 1]);
+console.log(age4);
+
+// We can store these results in a new array:
+const ageArray = [calculateAge(years2[0]), calculateAge(years2[years2.length - 1])]
+console.log(ageArray);
