@@ -295,3 +295,33 @@ console.log(anotherProfile.getSummary());
 
 // This now has the calculation built into the object and so can be used to make multiple profiles without having to individually write everything again.
 // The function must be an expression, defined as a value, with the function's name written as the key
+
+// Second Challenge: Creating a BMI function within an object to calculate and return each persons BMI:
+const mark = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+      this.bmi = this.mass / (this.height * this.height);
+      return this.bmi;
+    }
+  };
+   
+  const john = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+      this.bmi = this.mass / (this.height * this.height);
+      return this.bmi;
+    }
+  };
+   
+  mark.calcBMI();
+  john.calcBMI();
+   
+  if (mark.bmi > john.bmi) {
+    console.log(`${mark.fullName}'s BMI (${mark.bmi}) is higher than ${john.fullName}'s (${john.bmi})!`)
+  } else if (john.bmi > mark.bmi) {
+    console.log(`${john.fullName}'s BMI (${john.bmi}) is higher than ${mark.fullName}'s (${mark.bmi})!`)
+  }
