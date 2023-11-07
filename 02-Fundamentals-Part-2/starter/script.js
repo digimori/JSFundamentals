@@ -216,3 +216,43 @@ const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
 
 console.log(totals);
+
+// Objects - packages of data:
+// Example, written in object literal syntax with key-value pairs:
+const myProfile = {
+    firstName: 'Paige',
+    lastName: 'Bendall',
+    age: 2023 - 1992,
+    job: 'Web developer',
+    hobbies: ['Knitting', 'Painting', ' Video Games'],
+}
+
+// Data retrieval from an object:
+// Dot Notation:
+console.log(myProfile.job); // returns 'Web Developer'
+// Bracket notation:
+console.log(myProfile['lastName']); 
+
+const nameKeys = 'Name'; // This is a repeating property from the object. ie: firstName and lastName, they both contain 'Name'
+console.log(myProfile['first' + nameKeys]);
+console.log(myProfile['last' + nameKeys]);
+
+// This is bracket notation only. This can be used to concatenate file names and such.
+// Dot notation is the more common method
+
+// Using prompts to take in user input:
+// const interestedIn = prompt("What do you want to extract? firstName, lastName, age, job, hobbies?")
+// console.log(myProfile[interestedIn]);
+
+// If the user inputs 'firstName' then this will return 'Paige'
+
+// Adding new properties to objects:
+// Dot notation:
+myProfile.location = 'Wales';
+myProfile['faveDrink'] = 'Tea';
+console.log(myProfile);
+
+// Challenge: Paige has 3 hobbies, and her favourite is Painting
+const challenge1 = console.log(`${myProfile.firstName} has ${myProfile.hobbies.length} hobbies, and her favourite is ${myProfile.hobbies[1]}`);
+
+// Object Methods:
