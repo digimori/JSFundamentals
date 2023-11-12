@@ -34,6 +34,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'Correct number!';
     document.querySelector('.score').textContent = initialScore;
 
+    // High score
     if (initialScore > highScore) {
       highScore = initialScore;
       document.querySelector('.highscore').textContent = highScore;
@@ -42,31 +43,19 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highScore - 1;
     }
 
-    // Input too low
-  } else if (guessNum < randomNum) {
+    // Refactored Else if for incorrect guesses:
+  } else if (guessNum !== randomNum) {
     if (initialScore > 1) {
-      document.querySelector('.message').textContent = 'Guess is too low!';
+      document.querySelector('.message').textContent =
+        guessNum < randomNum ? 'Guess is too low!' : 'Guess is too high!';
       initialScore--;
       document.querySelector('.score').textContent = initialScore;
-    } else {
-      document.querySelector('.message').textContent = 'Game Over! You lose.';
-      document.body.style.background = 'red';
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('.number').textContent = randomNum;
     }
-
-    // Input too high
-  } else if (guessNum > randomNum) {
-    if (initialScore > 1) {
-      document.querySelector('.message').textContent = 'Guess is too high!';
-      initialScore--;
-      document.querySelector('.score').textContent = initialScore;
-    } else {
-      document.body.style.background = 'red';
-      document.querySelector('.message').textContent = 'Game Over! You lose.';
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('.number').textContent = randomNum;
-    }
+  } else {
+    document.querySelector('.message').textContent = 'Game Over! You lose.';
+    document.body.style.background = 'red';
+    document.querySelector('.score').textContent = 0;
+    document.querySelector('.number').textContent = randomNum;
   }
 });
 
