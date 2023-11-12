@@ -4,7 +4,7 @@
 
 /* Selecting and manipulating elements: querySelector/All with .innerHTML/textContent etc
 // Getting the elements
-document.querySelector('.message').textContent;
+
 document.querySelector('.score').textContent;
 document.querySelector('.highscore').textContent;
 document.querySelector('.guess').value;
@@ -18,20 +18,24 @@ let initialScore = 20;
 // Implementing the High Score save.
 let highScore = 0;
 
+// This will replace all instances of the message content changing
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 document.querySelector('.check').addEventListener('click', function () {
   let guessNum = Number(document.querySelector('.guess').value);
 
   // No input
   if (!guessNum) {
-    document.querySelector('.message').textContent =
-      'Please enter a number between 1 and 20';
+    displayMessage('Please enter a number between 1 and 20');
 
     // Correct answer
   } else if (guessNum === randomNum) {
     document.body.style.background = 'green';
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = randomNum;
-    document.querySelector('.message').textContent = 'Correct number!';
+    displayMessage('Correct number!');
     document.querySelector('.score').textContent = initialScore;
 
     // High score
@@ -46,13 +50,14 @@ document.querySelector('.check').addEventListener('click', function () {
     // Refactored Else if for incorrect guesses:
   } else if (guessNum !== randomNum) {
     if (initialScore > 1) {
-      document.querySelector('.message').textContent =
-        guessNum < randomNum ? 'Guess is too low!' : 'Guess is too high!';
+      displayMessage(
+        guessNum < randomNum ? 'Guess is too low!' : 'Guess is too high!'
+      );
       initialScore--;
       document.querySelector('.score').textContent = initialScore;
     }
   } else {
-    document.querySelector('.message').textContent = 'Game Over! You lose.';
+    displayMessage('Game Over! You lose.');
     document.body.style.background = 'red';
     document.querySelector('.score').textContent = 0;
     document.querySelector('.number').textContent = randomNum;
@@ -75,9 +80,11 @@ document.querySelector('.again').addEventListener('click', function () {
   initialScore = 20;
   randomNum = Math.trunc(Math.random() * 20) + 1;
   document.querySelector('.score').textContent = initialScore;
-  document.querySelector('.message').textContent = 'Start Guessing...';
+  displayMessage('Start Guessing...');
   document.querySelector('.number').style.width = '15rem';
   document.querySelector('.number').textContent = '?';
   document.body.style.background = '#222';
   document.querySelector('.guess').value = '';
 });
+
+// We can refactor the rest into functions when we review this module again to make sure we understand it.
