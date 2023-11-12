@@ -15,6 +15,8 @@ document.querySelector('.message').textContent = 'Correct Number!';*/
 
 let randomNum = Math.trunc(Math.random() * 20) + 1; // Number between 1 and 20;
 let initialScore = 20;
+// Implementing the High Score save.
+let highScore = 0;
 
 document.querySelector('.check').addEventListener('click', function () {
   let guessNum = Number(document.querySelector('.guess').value);
@@ -30,9 +32,15 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = randomNum;
     document.querySelector('.message').textContent = 'Correct number!';
-
-    initialScore++;
     document.querySelector('.score').textContent = initialScore;
+
+    if (initialScore > highScore) {
+      highScore = initialScore;
+      document.querySelector('.highscore').textContent = highScore;
+    } else if (initialScore === highScore) {
+      highScore = initialScore - 1;
+      document.querySelector('.highscore').textContent = highScore - 1;
+    }
 
     // Input too low
   } else if (guessNum < randomNum) {
@@ -80,6 +88,7 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.score').textContent = initialScore;
   document.querySelector('.message').textContent = 'Start Guessing...';
   document.querySelector('.number').style.width = '15rem';
+  document.querySelector('.number').textContent = '?';
   document.body.style.background = '#222';
   document.querySelector('.guess').value = '';
 });
