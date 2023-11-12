@@ -13,47 +13,73 @@ document.querySelector('.number').textContent;
 // Setting/Manipulating, these will be changed using if/else when events happen:
 document.querySelector('.message').textContent = 'Correct Number!';*/
 
-const randomNum = Math.trunc(Math.random() * 20) + 1; // Number between 1 and 20;
+let randomNum = Math.trunc(Math.random() * 20) + 1; // Number between 1 and 20;
 let initialScore = 20;
-
-let guessMessage = document.querySelector('.message').textContent;
-let highScore = document.querySelector('.highscore').textContent;
-let numBox = document.querySelector('.number').textContent;
 
 document.querySelector('.check').addEventListener('click', function () {
   let guessNum = Number(document.querySelector('.guess').value);
-  let randomizer = (document.querySelector('.number').textContent = randomNum);
 
+  // No input
   if (!guessNum) {
     document.querySelector('.message').textContent =
       'Please enter a number between 1 and 20';
+
+    // Correct answer
   } else if (guessNum === randomNum) {
+    document.body.style.background = 'green';
+    document.querySelector('.number').style.width = '30rem';
     document.querySelector('.number').textContent = randomNum;
     document.querySelector('.message').textContent = 'Correct number!';
 
     initialScore++;
     document.querySelector('.score').textContent = initialScore;
+
+    // Input too low
   } else if (guessNum < randomNum) {
     if (initialScore > 1) {
-      document.querySelector('.number').textContent = randomNum;
       document.querySelector('.message').textContent = 'Guess is too low!';
       initialScore--;
       document.querySelector('.score').textContent = initialScore;
     } else {
       document.querySelector('.message').textContent = 'Game Over! You lose.';
+      document.body.style.background = 'red';
       document.querySelector('.score').textContent = 0;
+      document.querySelector('.number').textContent = randomNum;
     }
+
+    // Input too high
   } else if (guessNum > randomNum) {
     if (initialScore > 1) {
-      document.querySelector('.number').textContent = randomNum;
       document.querySelector('.message').textContent = 'Guess is too high!';
       initialScore--;
       document.querySelector('.score').textContent = initialScore;
     } else {
+      document.body.style.background = 'red';
       document.querySelector('.message').textContent = 'Game Over! You lose.';
       document.querySelector('.score').textContent = 0;
+      document.querySelector('.number').textContent = randomNum;
     }
   }
 });
 
-// We need a 0 logic. Can't go lower than zero.
+/*
+ Code Challenge: 
+Implement a game reset function so that the player can start again.
+
+Soooo, we need to select the element that has the again button via its class.
+Attach an event click handler
+in the handler function, reset all of the values of the score and number variables
+Restore the initial conditions of the message/score/input friend
+restore the background colour to the grey we have and the div displaying the number back to 15rem.
+
+*/
+
+document.querySelector('.again').addEventListener('click', function () {
+  initialScore = 20;
+  randomNum = Math.trunc(Math.random() * 20) + 1;
+  document.querySelector('.score').textContent = initialScore;
+  document.querySelector('.message').textContent = 'Start Guessing...';
+  document.querySelector('.number').style.width = '15rem';
+  document.body.style.background = '#222';
+  document.querySelector('.guess').value = '';
+});
