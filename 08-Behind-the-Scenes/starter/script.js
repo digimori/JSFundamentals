@@ -46,7 +46,7 @@ console.log(year); // Code does not reach here due to the ref error, but if it c
 var me = 'Paige';
 let job = 'Teacher';
 const year = 1992;
-*/
+
 // Functions:
 console.log(addDeclaration(2, 3)); // This will run, because you can call a function prior to declaration
 console.log(addExpression(2, 3)); // Cannot access prior to defining as it's a const variable and in the temporal dead zone
@@ -63,5 +63,37 @@ const addExpression = function (a, b) {
 var addArrows = (a, b) => a + b; // Implicit return
 
 // If we changed the consts to var, the error will be different, as an Uncaught TypeError. This is because of hoisting abd it will be like trying to call undefined.
+*/
 
+// This 'this' Keyword in practice.
 
+console.log(this); // This will point to the "global object", which here, is the browser window
+
+const calcAge = function (birthYear) {
+  console.log(2023 - birthYear);
+  console.log(this); // Undefined, as it's not pointing to anything in this object and cannot go up to global scope
+};
+
+const calcAgeArrow = birthYear => {
+  console.log(2023 - birthYear);
+  console.log(this); // This will go to global and point to the browser window. Because Arrow functions don't have their own this ownership.
+};
+
+calcAge(1992);
+calcAgeArrow(1985);
+
+const profile = {
+  year: 1992,
+  calcAge: function () {
+    console.log(this);
+    console.log(2023 - this.year); // this will reference the object and get the value of the year key
+  },
+};
+profile.calcAge(this); // this will point to the object, as the object has its own this keyword that can be used
+
+const james = {
+  year: 2017,
+};
+
+james.calcAge = profile.calcAge; // This is copying the function from profile object over to the james object. This is "Method borrowing".
+james.calcAge(this); // Result will be 6, as it's pointing to the borrowed method

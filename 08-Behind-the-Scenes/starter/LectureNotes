@@ -38,10 +38,10 @@ function Expressions and Arrows:
 TDZ and let/const: An Example:
 const myName = 'Paige';
 if (myName === 'Paige') {
-==console.log(`${myName} is a ${job}`);
+console.log(`${myName} is a ${job}`);
 const age = 2023 - 1992;
-console.log(age);==
-const job = 'teacher'; 
+console.log(age);
+const job = 'teacher';
 console.log(x); // This will also give a reference error as we don't have any x defined
 }
 
@@ -52,8 +52,37 @@ This will produce a reference error: Cannot access 'job' before initialization.
 TDZ was introduced in ES6+ and exists to make it easier to avoid and catch errors. It also makes const variables work as they should, being immutable.
 Accessing variables prior to declaration is bad practice and should be avoided.
 
-this
+## this
 
-Regular Functions vs Arrow Functions
+this keyword/variable is a special variable that is created for every execution context (ie, every function).
+It takes the value of (or, points to) the "owner" of the function which the 'this' is used.
+this is not static. It entirely depends on how the function is called, and its value is only assigned when the function is actually called.
+
+To understand 'this', we need to first look at how functions are called.
+
+- Method with this = Object that is calling the method, the method will point to the object on which the method is called.  
+  an example:
+  const profile = {
+  name: 'Cee',
+  year: 1992,
+  calcAge: function () {
+  return 2023 - this.year,
+  }
+  }
+
+In this instance, 'this' is referring to the year keyword in this particular object (profile object), as the object "owns" this key.
+So, it's basically writing in the background profile.year.
+
+Another way to call a function, would just be a simple function call. ie: calcAge(); Not attached to any object.
+In this instance, this will be undefined (Strict mode only. Un-strict will point to global objects, which is bad. Don't do this)
+
+Arrow functions can also use 'this', however they don't get their own instance of "this". Instead 'this' refers to the surrounding function/parent function (lexical this).
+
+As an event listener, this will always point to the DOM element that the handler is attached to.
+So, for a set of buttons, pressing a button is like saying "This button in particular only in this instance"
+
+- REMEMBER: this does NOT point to the function itself, and also not its variable environment.
+
+## Regular Functions vs Arrow Functions
 
 Primitives vs Objects (Primitive vs. Reference types)
