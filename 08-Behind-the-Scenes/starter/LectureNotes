@@ -84,3 +84,22 @@ So, for a set of buttons, pressing a button is like saying "This button in parti
 - REMEMBER: this does NOT point to the function itself, and also not its variable environment.
 
 ## Primitives vs Objects (Primitive vs. Reference types)
+
+(Refer to script.js for examples)
+
+### Primitives:
+
+- Number
+- String
+- Boolean
+- Undefined
+- Null
+- Symbol
+- BigInt
+
+### Objects:
+
+- Object literal
+- Arrays
+- Functions
+- etc... Most things in JS are an object.

@@ -146,3 +146,55 @@ addExpr(2, 5);
 addExpr(2, 5, 8, 12);
 
 // Primitives vs Objects (Primitives vs Reference types):
+/*let age = 30;
+let oldAge = age; // preserving the previous value in a variable, as it gets re-assigned below.
+age = 31;
+
+// Object:
+const me = {
+  name: 'Paige',
+  age: 30,
+};
+
+const friend = me;
+friend.age = 27; // This will change the age on both me and friend to 27.
+
+*/
+
+// Primitives cont.
+
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davies'; // mutated and will take on the value of Davies. oldLastName will still save 'Williams' due to the stack.
+
+// Object as a reference value:
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const marriedJessica = jessica; // Copying the reference that is pointing to the object
+marriedJessica.lastName = 'Davies'; // This will mutate the original object also
+// This is because marriedJessica is not a new object in itself, it is just a reference to the original jessica object.
+// They both point to the same memory address in the heap.
+
+// marriedJessica = {}; // This will not work as it is const and therefore cannot be assigned to a new memory address. If it was let, we could re-assign.
+
+// If we wanted to copy the object so that it IS mutable:
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['alice', 'bob'], // The values cannot be wholly re-assigned via Object.assign
+};
+
+// object.assign, merges two objects and returns a new one:
+const jessicaCopy = Object.assign({}, jessica2); // Created a new object where everything from jessica2 is copied.
+jessicaCopy.lastName = 'Davies'; // This will now change the lastName value as we are no longer referencing, but actually re-assigning the value. jessica2 still exists in its original form.
+
+// This will add the names to BOTH the original and the copy due to the array being an object within an object.
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+// Object.assign only works on the top-level, so if there is an object within an object, it will not work (It only shallow copies)
