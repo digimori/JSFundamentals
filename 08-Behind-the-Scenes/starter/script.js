@@ -63,7 +63,7 @@ const addExpression = function (a, b) {
 var addArrows = (a, b) => a + b; // Implicit return
 
 // If we changed the consts to var, the error will be different, as an Uncaught TypeError. This is because of hoisting abd it will be like trying to call undefined.
-*/
+
 
 // This 'this' Keyword in practice.
 
@@ -97,3 +97,52 @@ const james = {
 
 james.calcAge = profile.calcAge; // This is copying the function from profile object over to the james object. This is "Method borrowing".
 james.calcAge(this); // Result will be 6, as it's pointing to the borrowed method
+
+
+const profile = {
+  firstName: 'Paige',
+  year: 1992,
+  calcAge: function () {
+    console.log(this);
+    console.log(2023 - this.year);
+  },
+  greet: () => console.log(`Hey, ${this.firstName}`),
+  // This will be "Hey, undefined" as arrow functions do not get their own 'this' keyword, the parent scope is not the object, it is global
+};
+profile.greet();*/
+
+const profile = {
+  firstName: 'Paige',
+  year: 1992,
+  calcAge: function () {
+    console.log(this);
+    console.log(2023 - this.year);
+
+    const self = this;
+    const isMillenial = function () {
+      console.log(self.year >= 1981 && self.year <= 1996);
+      //console.log(this.year >= 1981 && this.year <= 1996);
+      // year property cannot be read (undefined), it acts like it's pointing to global and therefore cannot access the year key
+      // This can be circumvented by defining this outside of the isMillenial function, but still within calcAge as: const self = this, and then point to self.
+      // It would then be written as self,year >= 1981 && self.year <= 1996 instead.
+    };
+    isMillenial();
+  },
+  greet: () => console.log(`Hey, ${this.firstName}`),
+  // This will be "Hey, undefined" as arrow functions do not get their own 'this' keyword, the parent scope is not the object, it is global
+};
+profile.greet();
+profile.calcAge();
+
+// arguments keyword - only available in regular functions
+
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+addExpr(2, 5);
+
+// This is useful for if we have more than the 2 arguments passed through the function, ie:
+addExpr(2, 5, 8, 12);
+
+// Primitives vs Objects (Primitives vs Reference types):

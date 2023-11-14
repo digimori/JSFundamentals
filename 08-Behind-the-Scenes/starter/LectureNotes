@@ -83,6 +83,4 @@ So, for a set of buttons, pressing a button is like saying "This button in parti
 
 - REMEMBER: this does NOT point to the function itself, and also not its variable environment.
 
-## Regular Functions vs Arrow Functions
-
-Primitives vs Objects (Primitive vs. Reference types)
+## Primitives vs Objects (Primitive vs. Reference types)
