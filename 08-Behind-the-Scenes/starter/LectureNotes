@@ -6,11 +6,54 @@ Execution Contexts and Call Stacks
 
 Scope and Scope Chain
 
-Variable Environments: Hoisting and TDZ
+## Variable Environments: Hoisting and TDZ
+
+### Hoisting in JavaScript:
+
+- Makes some types of variables accessible/usable in the code before they're actually declared (The variable is lifted to the top of the scope - On surface level understanding).
+- Before execution, the code is scanned for variable declarations, and for each variable, a new property is created in the variable environment object.
+
+Function declarations:
+
+- Hoisted: Yes (They can be called before declaration)
+- Initial Value: Actual function
+- Scope: Block (Strict mode only, Otherwise declared as a function scope)
+
+var Variables:
+
+- Hoisted: Yes (This is why we don't use var anymore, it can cause bugs)
+- Initial Value: undefined
+- Scope: Function (Local)
+
+let and const Variables:
+
+- Hoisted: No (Can be, but in practice, we do not do this)
+- Initial Value: <uninitialized>, TDZ (Temporal Dead Zone) - No Value to work with
+- Scope: Block
+
+function Expressions and Arrows:
+
+- Hoisting/Initial Values/Scope - Depend on if using let/const or var
+
+TDZ and let/const: An Example:
+const myName = 'Paige';
+if (myName === 'Paige') {
+==console.log(`${myName} is a ${job}`);
+const age = 2023 - 1992;
+console.log(age);==
+const job = 'teacher'; 
+console.log(x); // This will also give a reference error as we don't have any x defined
+}
+
+In the above example, the highlighted section is a Temporal Dead Zone for the job variable.
+Region of the scope where it's defined, but can't be used in any meaningful way.
+This will produce a reference error: Cannot access 'job' before initialization.
+
+TDZ was introduced in ES6+ and exists to make it easier to avoid and catch errors. It also makes const variables work as they should, being immutable.
+Accessing variables prior to declaration is bad practice and should be avoided.
 
 this
 
 Regular Functions vs Arrow Functions
 
 Primitives vs Objects (Primitive vs. Reference types)
-
