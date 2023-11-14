@@ -1,0 +1,16 @@
+High Level overview of JS Engine
+
+JS Engine and Runtime
+
+Execution Contexts and Call Stacks
+
+Scope and Scope Chain
+
+Variable Environments: Hoisting and TDZ
+
+this
+
+Regular Functions vs Arrow Functions
+
+Primitives vs Objects (Primitive vs. Reference types)
+
