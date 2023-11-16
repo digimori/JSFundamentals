@@ -1,32 +1,8 @@
 'use strict';
-
+/*
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
-
-// Data needed for first part of the section - This gets added to later
-const restaurantDefault = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-};
 
 // Array Destructuring:
 // Example is simulating a food delivery service
@@ -95,3 +71,109 @@ const [p, q, r] = [8, 9]; // The r variable will return undefined as there is no
 // Instead, we can assign some defaults to take care of that:
 const [xx = 1, yy = 1, zz = 1] = [8, 9]; // Now the value at index 2 (zz), will be 1, giving us a default value, whilst xx and yy are assigned 8 and 9 respectively.
 console.log(xx, yy, zz);
+*/
+// Object Destructuring
+const restaurantCont = {
+  resName: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+};
+
+// Similar concept as arrays.
+// Except we use the keys and extract them. Object order does not matter, so neither does the destructure unlike Arrays
+// For the below example, we want: name, categories, opening hours
+const { resName, openingHours, categories } = restaurantCont;
+console.log(resName, openingHours, categories);
+
+// We can use this, for example, in an API call to extract data from objects that are returned.
+
+// If we want the variable names to be different to the property names, we still need to reference the object that we're extracting from
+const {
+  resName: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurantCont;
+console.log(restaurantName, hours, tags);
+
+// We can also set default values assigned like in array destructuring:
+const { menu = [], starterMenu: starters = [] } = restaurantCont;
+// In the above, we've given starterMenu a new name, and given it a default of [] just in case the object doesn't exist
+console.log(menu, starters);
+
+// Mutating variables whilst destructuring the objects:
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+
+// We want to achieve a becoming 23 and b becoming 7:
+({ a, b } = obj); // Must be in parentheses, otherwise it will throw an unexpected token error (because of the =)
+console.log(a, b);
+
+// Nested Object destructuring, say we want to create two variables, one for open and one for close (in the opening hours section of the object)
+// openingHours is an object inside of the restaurant object and the days of the week are also objects within opening hours.
+const { fri } = openingHours; // {open: 11, close: 23}
+
+const {
+  fri: { open: openTime, close: closeTime },
+} = openingHours;
+console.log(openTime, closeTime); // 11, 23 are now assigned to these variables.
+
+// A practical application for destructuring:
+
+const restaurantPractical = {
+  resName: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  // Passing an argument which has the key names destructured as arguments
+  // We can also set defaults, ie, if the arguments cannot be destructured: starterIndex = 1, mainIndex = 0, time = '20:00'
+  orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+    console.log(
+      `Order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+};
+
+// Calling the orderDelivery function and passing it an object of options
+restaurantPractical.orderDelivery({
+  time: '22:30',
+  address: 'Via del sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
