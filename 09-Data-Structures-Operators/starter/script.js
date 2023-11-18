@@ -173,6 +173,12 @@ const restaurantPractical = {
   orderPasta: function (ingre1, ingre2, ingre3) {
     console.log(`Here is your pasta with ${ingre1}, ${ingre2}, ${ingre3}. `);
   },
+
+  //Minimum 1 ingredient, the rest optional:
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
 // Calling the orderDelivery function and passing it an object of options
@@ -258,3 +264,51 @@ const newRestaurantCopy = {
 newRestaurantCopy.name = 'Ristorante Roma';
 console.log(newRestaurantCopy.name);
 console.log(restaurantPractical.resName);
+
+// Rest operator looks similar to the Spread operator. It's like saying "And the rest of the object", thus doing the opposite of Spread.
+// It is to collect multiple elements and compress them into a single array, rather than unpack them into multiple parts.
+
+// This is SPREAD as it is on the right side of the assignment operator, this is combined with a destructure:
+const restArray = [1, 2, ...[3, 4]];
+
+// REST w/DESTRUCTURING
+// REST due to being on left side of operator (=)
+const [firstNum, secondNum, ...others] = [1, 2, 3, 4, 5]; // firstNum = 1, secondNum = 2, others = [3, 4, 5]
+console.log(firstNum, secondNum, others);
+
+// Further example using the restaurant objects:
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurantPractical.mainMenu,
+  ...restaurantPractical.starterMenu,
+];
+console.log(pizza, risotto, otherFood); // Remember, this will collect all of the variables after the last one declared, so will not pick up any that have been left out by destructuring
+// REST must always be the last parameter therefore there can only ever be one REST in any one destructuring assignment.
+
+// REST with Objects further:
+const { sat, ...weekdays } = restaurantPractical.openingHours;
+console.log(weekdays); // This will return Friday and Thursday as Saturday is defined in its own variable.
+// Remember: Object order does not matter, which is why it did not immediately stop after Saturday!
+
+// REST w/ FUNCTIONS:
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    // Add the current loop to the 'sum' variable:
+    sum += numbers[i];
+    console.log(`ADDITION TIME: ${sum}`);
+  }
+};
+
+// Sample data:
+add(2, 3); // [2, 3]
+add(6, 7, 8, 3);
+add(4, 5, 3, 7, 2, 7, 1);
+
+// The data is passed through the function and then packed into an array called 'numbers'
+
+// Another example:
+const x = [23, 5, 7];
+add(...x); // Calling the function with the above array spread, this will then be collected by the function and passed as an array again like the above example.
+
+// Edge cases - In the restaurant object, we'll be making an orderingPizza() function call and doing the following:
+restaurantPractical.orderPizza('Tomato', 'Olives', 'Anchovies'); // Olives and Anchovies are in an array on their own due to REST.
