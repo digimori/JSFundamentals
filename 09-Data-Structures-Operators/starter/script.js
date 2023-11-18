@@ -168,6 +168,11 @@ const restaurantPractical = {
       `Order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
+
+  // A function to create pasta using precisely 3 ingredients:
+  orderPasta: function (ingre1, ingre2, ingre3) {
+    console.log(`Here is your pasta with ${ingre1}, ${ingre2}, ${ingre3}. `);
+  },
 };
 
 // Calling the orderDelivery function and passing it an object of options
@@ -177,3 +182,79 @@ restaurantPractical.orderDelivery({
   mainIndex: 2,
   starterIndex: 2,
 });
+
+// Spread operator: Expanding arrays and unpacking all of its elements:
+
+// ex, if we want to get an array and unpack it, whilst also adding some new ones at the start:
+const arr = [7, 8, 9];
+
+// Normally, we would have to loop over the array and add the value to it on each loop to achieve the following:
+const badNewArray = [1, 2, arr[0], arr[1], arr[2]];
+
+// Instead, we use the spread operator:
+const newArr = [1, 2, ...arr]; // This will expand the original arr into the new elements
+console.log(newArr); // 1, 2, 7, 8, 9
+
+// Fetching/Logging the values of the new array created through the spread operator:
+console.log(...newArr); // This will log the individual elements of the array. This is different from just passing newArr as on its own, it also shows the brackets []
+
+// Going back to the restaurant object, if we wanted to add a new menu item:
+const newMenu = [...restaurantPractical.mainMenu, 'Gnocci'];
+console.log(newMenu);
+// This isn't manipulating the array, a new array is created here. This is how it differs from destructuring, as destructuring assigns the elements to new variables, spread does not.
+
+// Spread operator use cases:
+// Shallow copies of arrays, merge arrays together:
+
+// Copy array:
+const mainMenuCopy = [...restaurantPractical.mainMenu]; // Shallow copy of the mainMenu array in the restaurant object
+
+// Join 2 arrays:
+const mainMenuJoined = [
+  ...restaurantPractical.starterMenu,
+  ...restaurantPractical.mainMenu,
+];
+console.log(mainMenuJoined);
+// In the above, we basically took all of the elements out of both arrays, copied them, and then merged them into one menu array
+
+// Spread works on all iterables IE: arrays, strings, maps, sets and as of ES2018, Objects
+
+// String example, separating out values and adding one to the end::
+const str = 'Cee';
+const letters = [...str, '', 'S.']; // "C", "e", "e", "S."
+console.log(letters); // As before, this will log as an array []
+console.log(...str); // Will log C e e S.
+
+// This CANNOT also be used to build a template literal:
+//console.log(`${...str}`); // This will error.
+
+// Functions using Spread operator:
+
+/*
+const ingredients = [
+  prompt('Lets make Pasta! Ingredient 1?'),
+  prompt('Lets make Pasta! Ingredient 2?'),
+  prompt('Lets make Pasta! Ingredient 3?'),
+];
+console.log(ingredients);
+
+
+// Spreads the prompts and passes them as arguments through the orderPasta function.
+restaurantPractical.orderPasta(...ingredients); // This also accounts for the fact we may have an array that we're unsure how many elements are in it
+*/
+
+// Objects with Spread, make a new shallow copy of restaurant object with more info:
+const newRestaurant = {
+  foundingYear: 1999,
+  ...restaurantPractical,
+  founder: 'Lil Gui',
+}; // Order does not matter
+
+console.log(newRestaurant);
+
+const newRestaurantCopy = {
+  ...restaurantPractical,
+};
+newRestaurantCopy.name = 'Ristorante Roma';
+console.log(newRestaurantCopy.name);
+console.log(restaurantPractical.resName);
