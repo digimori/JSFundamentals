@@ -395,7 +395,6 @@ rest2.owner = rest2.owner && '<Anonymous>';
 // This works because of short circuit. It evaluated the first, found it truthy, so instead returned as '<Anonymous>';
 // More concise again:
 rest2.owner &&= '<Anonymous>';
-*/
 
 // Challenge #1 - Football Betting App:
 // Test Data Object:
@@ -476,7 +475,64 @@ printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 printGoals('Davies', 'Muller');
 printGoals(...game.scored);
 
-// 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator. */
+// 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator. 
 team1 < team2 && console.log('Team 1 is more likely to win.'); // Evaluates first and continues
 team1 > team2 && console.log('Team 2 is more likely to win.'); // This will be if we change the betting odds.
+*/
 
+// Looping Arrays using For-Of:
+
+// Starter Object to take from:
+const restaurantPractical2 = {
+  resName: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  orderDelivery: function ({ starterIndex, mainIndex, time, address }) {},
+  orderPasta: function (ingre1, ingre2, ingre3) {},
+  orderPizza: function (mainIngredient, ...otherIngredients) {},
+};
+restaurantPractical2.orderDelivery({
+  time: '22:30',
+  address: 'Via del sole, 21',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+const menu = [
+  ...restaurantPractical2.starterMenu,
+  ...restaurantPractical2.mainMenu,
+]; // Combined menus
+
+// For loop:
+// Loops over all of the items in the menu variable defined above, assigning each element to 'item', like how every iteration is 'i' in a traditional for loop.
+// Continue and Break can still be used here.
+for (const item of menu) {
+  console.log(item);
+}
+
+// Getting the index can be cumbersome, though, you need to use the .entries() method;
+for (const [i, el] of menu.entries()) {
+  // The above [i, el] is a destructure of the index and element.
+  console.log(`${i + 1}: ${el}`);
+}
+// Each iteration creates a new array with an index and the string.
