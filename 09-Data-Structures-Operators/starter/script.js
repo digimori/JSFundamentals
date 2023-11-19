@@ -536,3 +536,35 @@ for (const [i, el] of menu.entries()) {
   console.log(`${i + 1}: ${el}`);
 }
 // Each iteration creates a new array with an index and the string.
+
+// Enhanced object literals:
+// The Restaurant object we've been using is an example of an object literal as it has been "literally" written.  
+// Property names can be computed/calculated with the enhanced literals:
+  const altTitles = ['alternate1', 'alternate2', 'alternate3'];
+  
+// So, if we wanted to add another object into an object:
+const description = {
+  [altTitles[0]]: {
+    country: 'France'
+  },
+  [altTitles[1]]: {
+    country: 'Germany'
+  },
+  bookDescription: 'Long Description goes in here',
+};
+
+// Adding it to this object:
+const exampleBookObj1 = {
+  title: 'Tester',
+  author: 'Tester Author',
+  description, // Added from the above object
+};
+console.log(exampleBookObj1);
+
+// Functions also don't need to be written as, the function keyword can be removed to make the code a bit more concise:
+/* 
+order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  }
+  */
+
