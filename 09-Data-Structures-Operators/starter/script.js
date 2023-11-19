@@ -71,7 +71,7 @@ const [p, q, r] = [8, 9]; // The r variable will return undefined as there is no
 // Instead, we can assign some defaults to take care of that:
 const [xx = 1, yy = 1, zz = 1] = [8, 9]; // Now the value at index 2 (zz), will be 1, giving us a default value, whilst xx and yy are assigned 8 and 9 respectively.
 console.log(xx, yy, zz);
-*/
+
 // Object Destructuring
 const restaurantCont = {
   resName: 'Classico Italiano',
@@ -247,7 +247,7 @@ console.log(ingredients);
 
 // Spreads the prompts and passes them as arguments through the orderPasta function.
 restaurantPractical.orderPasta(...ingredients); // This also accounts for the fact we may have an array that we're unsure how many elements are in it
-*/
+
 
 // Objects with Spread, make a new shallow copy of restaurant object with more info:
 const newRestaurant = {
@@ -312,3 +312,87 @@ add(...x); // Calling the function with the above array spread, this will then b
 
 // Edge cases - In the restaurant object, we'll be making an orderingPizza() function call and doing the following:
 restaurantPractical.orderPizza('Tomato', 'Olives', 'Anchovies'); // Olives and Anchovies are in an array on their own due to REST.
+
+// Short-Circuiting with && and ||:
+// || example:
+console.log(3 || 'Paige'); // 3 is the result, this means the result of || Doesn't have to be a boolean
+
+// If the first value is a truthy value (ie, not null, 0, NaN, undefined etc) it will be returned.
+// The second value, if truthy, will not be evaluated at all. It stops after the first truthy.
+console.log('' || 'Paige'); // 'Paige' as an empty string is falsy
+console.log(true || 0); // True as it stopped at true. If we swapped them, it would still be true as 0 is falsy
+console.log(undefined || null); // undefined, neither are truthy
+
+// restaurantPractical.numGuests // We currently don't know if numGuests exists.
+const guests1 = restaurantPractical.numGuests
+  ? restaurantPractical.numGuests
+  : 10;
+console.log(guests1); // 10 will be the result as numGuests doesn't exist. So it takes on the first truthy value.
+
+// If we had previously set the numGuests value to say 23, then the result of the above ternary would be 23, as it would be the first truthy in the chain.
+// We can now short-circuit the above ternary into the following:
+const guests2 = restaurantPractical.numGuests || 10; // So, basically saying "numGuests exists, or if it doesn't, 10 is the result"
+console.log(guests2);
+
+// if numGuests is 0, it will still default to 10, despite being technically defined, as 0 is falsy
+
+console.log('------- && examples start here -------');
+// && Example, this works in the opposite way to the OR operator. It instead returns the first Falsy :
+console.log(0 && 'Paige'); // Result would be 0, as it returns the first Falsy value and stops.
+console.log(7 && 'Paige'); // 'Paige' is the result here as it evaluates the first truthy, doesn't find a falsy, and so keeps evaluating until the last value and returns it or it hits a falsy.
+console.log('Hello' && 23 && null && 'Paige'); // null is the result, as it's a falsy and stops here and returns this value
+
+// Practical Example, so first we're checking if the function value exists, and if it does, then it executes the code block:
+if (restaurantPractical.orderPizza) {
+  restaurantPractical.orderPizza('Tomato', 'Spinach');
+}
+
+// In a simpler way, ie: with Short-circuiting:
+restaurantPractical.orderPizza &&
+  restaurantPractical.orderPizza('Tomato', 'Spinach');
+
+// Evaluates the left side, if true, executes the right side. It's a shorter version of the above if statement.
+// This is useful for short, concise evaluation. Do not turn all of your If/Else into these as it will make the code harder to read!
+
+// Nullish Coalescing operator (??) - Introduced in ES2020, might not be in older code bases:
+restaurantCont.numGuests = 0; // Falsy value
+const guestsCorrect = restaurantPractical.numGuests ?? 10;
+console.log(guestsCorrect); // Will return 0 and thus the correct value instead of undefined as we're using a nullish operator.
+
+// Evaluates it as if 0 or empty strings '' are truthy instead.
+// If, however the numGuests was undefined or null, the evaluation would continue and return 10 as this only works to make 0 and empty strings into truthy.
+
+// Logical Assignment Operators:
+
+const rest1 = {
+  name: 'Capri',
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// Say we got the above information from an API and want to add a property to them, ie, we want all of the objects to have the numGuests property:
+/*
+rest1.numGuests = rest1.numGuests || 10; // Returns 20, as rest1 already has the property numGuests with a truthy value
+rest2.numGuests = rest2.numGuests || 10; // Returns 10 as rest2 does not have the property and so creates it and assigns it 10.
+
+// Writing the same as above, but more concise:
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
+
+
+// The issue we run into here is that if we set any of the numGuests to 0, it's going to return 10, which will be inaccurate for what we want.
+// This is explained above in the original Short-circuiting notes.
+// This can be resolved via Nullish assignment:
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// && operations, for example, to anonymise a value in the object:
+rest2.owner = rest2.owner && '<Anonymous>';
+// This works because of short circuit. It evaluated the first, found it truthy, so instead returned as '<Anonymous>';
+// More concise again:
+rest2.owner &&= '<Anonymous>';
+*/
