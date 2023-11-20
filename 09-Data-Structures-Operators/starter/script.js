@@ -538,17 +538,17 @@ for (const [i, el] of menu.entries()) {
 // Each iteration creates a new array with an index and the string.
 
 // Enhanced object literals:
-// The Restaurant object we've been using is an example of an object literal as it has been "literally" written.  
+// The Restaurant object we've been using is an example of an object literal as it has been "literally" written.
 // Property names can be computed/calculated with the enhanced literals:
-  const altTitles = ['alternate1', 'alternate2', 'alternate3'];
-  
+const altTitles = ['alternate1', 'alternate2', 'alternate3'];
+
 // So, if we wanted to add another object into an object:
 const description = {
   [altTitles[0]]: {
-    country: 'France'
+    country: 'France',
   },
   [altTitles[1]]: {
-    country: 'Germany'
+    country: 'Germany',
   },
   bookDescription: 'Long Description goes in here',
 };
@@ -568,3 +568,51 @@ order(starterIndex, mainIndex) {
   }
   */
 
+// Optional Chaining (?.)
+// So, say we wanted to get the opening hours array of our restaurant object:
+//console.log(restaurantPractical2.openingHours.mon.open); // This property doesn't exist, so it will present an undefined followed by an error as there's no 'open' attached.
+
+// Example WITHOUT Optional Chaining
+// So in theory, if we didn't know that mon exists or not, we can optional chain to check for it:
+// If mon exists, then console log the opening hours that theoretically should be attached to it.
+if (
+  restaurantPractical2.openingHours &&
+  restaurantPractical2.openingHours.mon
+) {
+  console.log(restaurantPractical2.openingHours.mon.open);
+}
+
+// Now WITH Optional Chaining:
+console.log(restaurantPractical2.openingHours?.mon?.open);
+// The above is basically saying that Only IF the mon property exists, do we continue on to find/read the open property.
+// This will return undefined as mon does not exist, but does not continue on so far as to throw an error, which can cause further run issues.
+// You can keep changing to essentially ask an if statement at each point.
+
+// More Real World example:
+const days = ['mon', 'tues', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+// Loop over them to see whether or not the restaurant is open on those days using optional chaining.
+for (const day of days) {
+  //const open = restaurantPractical2.openingHours[day]?.open; // [day] is the iteration, so we're checking against all of them as it loops.
+  // Will return undefined on all days not in the object without throwing an error UNLESS we set a default value with the Nullish Coalescing operator:
+  const open = restaurantPractical2.openingHours[day]?.open ?? 'closed';
+  console.log(`${day}: ${open}`);
+}
+
+// Optional chaining for calling Methods (checking the method exists before execution);
+// Below method does exist, so will read the first part and return the 0 and 1 indexes values of the array
+console.log(restaurantPractical2.order?.(0, 1) ?? 'Method does not exist');
+// If we call one that doesn't:
+console.log(restaurantPractical2.orderDrinks?.() ?? 'Method does not exist');
+
+// It also works on Arrays, ie: Checking if an array is empty:
+const users = [
+  {
+    name: 'Paige',
+    email: 'test@test.com',
+  },
+];
+
+console.log(users[0]?.name ?? 'User array empty');
+
+// to review: Optional Chaining tests if the value on the left does exist before continuing the execution. It makes if statements more concise.
