@@ -659,3 +659,23 @@ for (const [key, { open, close }] of entries) {
 // The properties being passed in are the keys from the object,
 //and the values, due to them being an object within an object for the open and close times, we're destructuring them by specifying their property names.
 // the key part can have any name, but the values must the specifically match to the object
+
+// Challenge, continuation of the football betting app:
+/*
+1. Loop over the game.scored array and print each player name to the console, along with the goal number: ie: Goal 1: Lewandowski
+2. Use a loop to calculate the average odd and log it to the console (Check back over your calculating averages notes, these are when you did the BMI calc and Tip calc)
+3. Print the 3 odds to the console, but in a nice formatted way, like:
+Odd of victory Bayern Munich: 1.33
+Odd of Draw: 3.25
+Odd of Victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, no hardcoding except for "draw".
+HINT: Note how the odds and the game objects have the same property names
+
+BONUS Challenge:
+1. Create an object called 'scorers' which contains the names of the players who scored as properties and the number of goals as the value.
+In this game, it should look like this:
+{Gnarby: 1,
+Hummels: 1,
+Lewandowski: 2}
+etc.
+*/
