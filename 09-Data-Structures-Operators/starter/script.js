@@ -527,13 +527,13 @@ const menu = [
 // Loops over all of the items in the menu variable defined above, assigning each element to 'item', like how every iteration is 'i' in a traditional for loop.
 // Continue and Break can still be used here.
 for (const item of menu) {
-  console.log(item);
+  //console.log(item);
 }
 
 // Getting the index can be cumbersome, though, you need to use the .entries() method;
 for (const [i, el] of menu.entries()) {
   // The above [i, el] is a destructure of the index and element.
-  console.log(`${i + 1}: ${el}`);
+  //console.log(`${i + 1}: ${el}`);
 }
 // Each iteration creates a new array with an index and the string.
 
@@ -559,7 +559,7 @@ const exampleBookObj1 = {
   author: 'Tester Author',
   description, // Added from the above object
 };
-console.log(exampleBookObj1);
+//console.log(exampleBookObj1);
 
 // Functions also don't need to be written as, the function keyword can be removed to make the code a bit more concise:
 /* 
@@ -579,11 +579,11 @@ if (
   restaurantPractical2.openingHours &&
   restaurantPractical2.openingHours.mon
 ) {
-  console.log(restaurantPractical2.openingHours.mon.open);
+  //console.log(restaurantPractical2.openingHours.mon.open);
 }
 
 // Now WITH Optional Chaining:
-console.log(restaurantPractical2.openingHours?.mon?.open);
+//console.log(restaurantPractical2.openingHours?.mon?.open);
 // The above is basically saying that Only IF the mon property exists, do we continue on to find/read the open property.
 // This will return undefined as mon does not exist, but does not continue on so far as to throw an error, which can cause further run issues.
 // You can keep changing to essentially ask an if statement at each point.
@@ -596,14 +596,14 @@ for (const day of days) {
   //const open = restaurantPractical2.openingHours[day]?.open; // [day] is the iteration, so we're checking against all of them as it loops.
   // Will return undefined on all days not in the object without throwing an error UNLESS we set a default value with the Nullish Coalescing operator:
   const open = restaurantPractical2.openingHours[day]?.open ?? 'closed';
-  console.log(`${day}: ${open}`);
+  //console.log(`${day}: ${open}`);
 }
 
 // Optional chaining for calling Methods (checking the method exists before execution);
 // Below method does exist, so will read the first part and return the 0 and 1 indexes values of the array
-console.log(restaurantPractical2.order?.(0, 1) ?? 'Method does not exist');
+//console.log(restaurantPractical2.order?.(0, 1) ?? 'Method does not exist');
 // If we call one that doesn't:
-console.log(restaurantPractical2.orderDrinks?.() ?? 'Method does not exist');
+//console.log(restaurantPractical2.orderDrinks?.() ?? 'Method does not exist');
 
 // It also works on Arrays, ie: Checking if an array is empty:
 const users = [
@@ -613,6 +613,49 @@ const users = [
   },
 ];
 
-console.log(users[0]?.name ?? 'User array empty');
+//console.log(users[0]?.name ?? 'User array empty');
 
 // to review: Optional Chaining tests if the value on the left does exist before continuing the execution. It makes if statements more concise.
+
+// Looping objects: Object Keys, Values, Entries.
+// Looping over property names (also known as Keys, Key-Value pairs):
+
+const properties = Object.keys(restaurantPractical2.openingHours);
+console.log(properties);
+
+for (const day of properties) {
+  console.log(day);
+}
+
+// The above gets the properties of the keys from the Object
+// So, if we wanted to use this to check if the restaurant is open or not, for example:
+console.log(`We are open on: ${properties.length} days`); // This will return the numbers that match the keys in the properties variable.
+// So the outcome will be 3 days, as thu, fri, sat are the three property keys available to us
+
+// We can actually put all of this together into a string as a single operation of sorts:
+let openStr = `We are open on ${properties.length} days of the week: `;
+for (const day of properties) {
+  openStr += `${day},`; // This adds each iteration of the loop onto the end of the string above.
+}
+
+console.log(openStr);
+
+// Property Values (The Value side of Key-Value pairs):
+const values = Object.values(restaurantPractical2.openingHours); // Getting the values of the openingHours object.
+console.log(values);
+
+// The method of looping is exactly the same as Keys in concept.
+
+// To loop over the entire object (so the Key and Value parts concurrently), we need Entries, returning the Key and Value:
+// Entire Object
+const entries = Object.entries(restaurantPractical2.openingHours);
+console.log(entries);
+
+// We can now use this to loop over, whilst destructuring the loop:
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+
+// The properties being passed in are the keys from the object,
+//and the values, due to them being an object within an object for the open and close times, we're destructuring them by specifying their property names.
+// the key part can have any name, but the values must the specifically match to the object
