@@ -661,16 +661,77 @@ for (const [key, { open, close }] of entries) {
 // the key part can have any name, but the values must the specifically match to the object
 
 // Challenge, continuation of the football betting app:
-/*
-1. Loop over the game.scored array and print each player name to the console, along with the goal number: ie: Goal 1: Lewandowski
-2. Use a loop to calculate the average odd and log it to the console (Check back over your calculating averages notes, these are when you did the BMI calc and Tip calc)
-3. Print the 3 odds to the console, but in a nice formatted way, like:
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+// 1. Loop over the game.scored array and print each player name to the console, along with the goal number: ie: Goal 1: Lewandowski
+
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player}`);
+}
+
+//2. Use a loop to calculate the average odd and log it to the console (Check back over your calculating averages notes, these are when you did the BMI calc and Tip calc)
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) {
+  average += odd;
+  average /= odds.length;
+  console.log(average);
+}
+
+/*3. Print the 3 odds to the console, but in a nice formatted way, like:
 Odd of victory Bayern Munich: 1.33
 Odd of Draw: 3.25
 Odd of Victory Borrussia Dortmund: 6.5
 Get the team names directly from the game object, no hardcoding except for "draw".
 HINT: Note how the odds and the game objects have the same property names
+*/
 
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory: ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${odd}`);
+}
+
+/*
 BONUS Challenge:
 1. Create an object called 'scorers' which contains the names of the players who scored as properties and the number of goals as the value.
 In this game, it should look like this:
@@ -679,3 +740,10 @@ Hummels: 1,
 Lewandowski: 2}
 etc.
 */
+// Loop over the array, add the array elements as Object properties, then increase the count on the next loop.
+
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+  console.log(scorers);
+}
